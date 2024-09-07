@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqi0b8eec6vpy"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_gmpmw"]
+[ext_resource type="PackedScene" uid="uid://bdn7bpve0nelp" path="res://player.tscn" id="2_wstvt"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_gmpmw")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(24, 0, 24, 144, 64, 144, 96, 160, 136, 160, 168, 144, 200, 144, 200, 176, 240, 176, 240, 144, 264, 144, 264, 168, 280, 168, 464, 168, 464, 192, 320, 192, 0, 192, 0, 0)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
+color = Color(0.133333, 0.607843, 0.113725, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_wstvt")]
+position = Vector2(40, 48)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 10
+limit_bottom = -10
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
