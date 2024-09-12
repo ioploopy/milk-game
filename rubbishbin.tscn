@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://rtjmv6agvvx1"]
+
+[ext_resource type="Script" path="res://rubbishbin.gd" id="1_2s3kh"]
+
+[node name="rubbishbin" type="Node2D"]
+script = ExtResource("1_2s3kh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
+color = Color(3.97079e-06, 0.59161, 0.0228226, 1)

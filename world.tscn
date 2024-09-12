@@ -1,18 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqi0b8eec6vpy"]
+[gd_scene load_steps=7 format=3 uid="uid://bqi0b8eec6vpy"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_gmpmw"]
 [ext_resource type="PackedScene" uid="uid://bdn7bpve0nelp" path="res://player.tscn" id="2_wstvt"]
+[ext_resource type="PackedScene" uid="uid://rtjmv6agvvx1" path="res://rubbishbin.tscn" id="4_nnyuc"]
+[ext_resource type="Texture2D" uid="uid://dwg6m6ojglowe" path="res://ladder.png" id="5_0aijr"]
+[ext_resource type="PackedScene" uid="uid://buww2mi4g12eb" path="res://level_tile_map.tscn" id="5_ftpv3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vm1k5"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_gmpmw")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(24, 0, 24, 144, 64, 144, 96, 160, 136, 160, 168, 144, 200, 144, 200, 176, 240, 176, 240, 144, 264, 144, 264, 168, 280, 168, 464, 168, 464, 192, 320, 192, 0, 192, 0, 0)
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionPolygon2D"]
-color = Color(0.133333, 0.607843, 0.113725, 1)
 
 [node name="Player" parent="." instance=ExtResource("2_wstvt")]
 position = Vector2(40, 48)
@@ -23,3 +20,18 @@ limit_top = 10
 limit_bottom = -10
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
+
+[node name="rubbishbin" parent="." instance=ExtResource("4_nnyuc")]
+position = Vector2(280, 152)
+
+[node name="TileMap" parent="." instance=ExtResource("5_ftpv3")]
+layer_0/tile_data = PackedInt32Array(458753, 65537, 0, 458754, 65537, 0, 458755, 65537, 0, 458756, 65537, 0, 458757, 65537, 0, 458758, 5, 0, 458759, 5, 0, 458760, 5, 0, 458761, 5, 0, 458762, 5, 0, 458763, 5, 0, 458764, 5, 0, 458765, 5, 0, 524289, 196613, 0, 524290, 196613, 0, 524291, 196613, 0, 524292, 196613, 0, 524293, 65537, 0, 524294, 65537, 0, 524295, 65537, 0, 524296, 65537, 0, 524297, 65537, 0, 524298, 65537, 0, 524299, 65537, 0, 524300, 65537, 0, 524301, 65537, 0, 458766, 5, 0, 458767, 5, 0, 458768, 5, 0, 458769, 65537, 0, 458770, 65537, 0, 524307, 65537, 0, 524308, 65537, 0, 458772, 5, 0, 458773, 5, 0, 458771, 65537, 0, 524309, 65537, 0, 524306, 196613, 0, 524305, 196613, 0, 524304, 65537, 0, 524303, 65537, 0, 524302, 65537, 0, 393218, 1, 0, 327682, 1, 0, 262146, 1, 0, 196610, 1, 0)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(32, 112)
+shape = SubResource("RectangleShape2D_vm1k5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+texture = ExtResource("5_0aijr")

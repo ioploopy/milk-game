@@ -5,6 +5,7 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 const ACCELERATION = 800
 const FRICTION = 1000
+const ALIVE = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -41,11 +42,14 @@ func apply_friction(input_axis, delta):
 		velocity.x = move_toward(velocity.x, 0, FRICTION*delta)
 
 func update_animations(input_axis):
-	if input_axis != 0:
-		animated_sprite_2d.flip_h = (input_axis < 0)
-		animated_sprite_2d.play("run")
+	if ALIVE:
+		if input_axis != 0:
+			animated_sprite_2d.flip_h = (input_axis < 0)
+			animated_sprite_2d.play("run")
+		else:
+			animated_sprite_2d.play("idle")
+		
+		if not is_on_floor():
+			animated_sprite_2d.play("jump")
 	else:
-		animated_sprite_2d.play("idle")
-	
-	if not is_on_floor():
-		animated_sprite_2d.play("jump")
+		animated_sprite_2d.play("dead")
