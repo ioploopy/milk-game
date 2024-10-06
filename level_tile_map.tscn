@@ -2,17 +2,15 @@
 
 [ext_resource type="Texture2D" uid="uid://bm0qwxanuga8g" path="res://ground.png" id="1_ln1a4"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l66k0"]
-resource_name = "ground"
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sofpr"]
 texture = ExtResource("1_ln1a4")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
 1:0/0 = 0
-1:0/0/terrain_set = 0
-1:0/0/terrain = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:0/0/terrains_peering_bit/right_side = 0
-1:0/0/terrains_peering_bit/left_side = 0
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 0
@@ -23,13 +21,25 @@ texture = ExtResource("1_ln1a4")
 2:0/0/terrains_peering_bit/left_side = 0
 3:0/0 = 0
 3:0/0/terrain_set = 0
+3:0/0/terrain = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:0/0/terrains_peering_bit/right_side = 0
-3:0/0/terrains_peering_bit/bottom_side = 0
 3:0/0/terrains_peering_bit/left_side = 0
-3:0/0/terrains_peering_bit/top_side = 0
+4:0/0 = 0
+4:0/0/terrain_set = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:0/0/terrains_peering_bit/right_side = 0
+4:0/0/terrains_peering_bit/bottom_side = 0
+4:0/0/terrains_peering_bit/left_side = 0
+4:0/0/terrains_peering_bit/top_side = 0
+5:0/0 = 0
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_5loms"]
 physics_layer_0/collision_layer = 1
@@ -37,8 +47,8 @@ physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "ground"
 terrain_set_0/terrain_0/color = Color(0.234054, 0.402089, 0.536998, 1)
-sources/5 = SubResource("TileSetAtlasSource_l66k0")
-tile_proxies/coords_level = [[0, Vector2i(0, 0)], [1, Vector2i(0, 0)], [2, Vector2i(0, 0)], [5, Vector2i(1, 0)], [3, Vector2i(0, 0)], [5, Vector2i(2, 0)], [4, Vector2i(0, 0)], [5, Vector2i(3, 0)]]
+sources/1 = SubResource("TileSetAtlasSource_sofpr")
+tile_proxies/coords_level = [[0, Vector2i(0, 0)], [1, Vector2i(0, 0)], [2, Vector2i(0, 0)], [5, Vector2i(1, 0)], [3, Vector2i(0, 0)], [5, Vector2i(2, 0)], [4, Vector2i(0, 0)], [5, Vector2i(3, 0)], [5, Vector2i(0, 0)], [1, Vector2i(1, 0)], [5, Vector2i(1, 0)], [1, Vector2i(2, 0)], [5, Vector2i(2, 0)], [1, Vector2i(3, 0)], [5, Vector2i(3, 0)], [1, Vector2i(4, 0)], [5, Vector2i(4, 0)], [1, Vector2i(5, 0)]]
 
 [node name="TileMap" type="TileMap"]
 tile_set = SubResource("TileSet_5loms")

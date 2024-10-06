@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdn7bpve0nelp"]
+[gd_scene load_steps=10 format=3 uid="uid://bdn7bpve0nelp"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_8xrp5"]
 [ext_resource type="Texture2D" uid="uid://d1hwj7u7a8xhq" path="res://little timmy - idle.png" id="2_jx008"]
@@ -54,6 +54,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5uxt"]
 size = Vector2(15, 29)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hrdht"]
+size = Vector2(17, 29)
+
 [node name="Player" type="CharacterBody2D"]
 floor_stop_on_slope = false
 floor_snap_length = 10.0
@@ -63,7 +66,19 @@ script = ExtResource("1_8xrp5")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_rqmoa")
 animation = &"run"
+frame_progress = 0.206471
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -14.5)
 shape = SubResource("RectangleShape2D_t5uxt")
+
+[node name="LadderDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="LadderDetector"]
+position = Vector2(-0.5, -14.5)
+shape = SubResource("RectangleShape2D_hrdht")
+
+[connection signal="area_entered" from="LadderDetector" to="." method="_on_ladder_detector_area_entered"]
+[connection signal="area_exited" from="LadderDetector" to="." method="_on_ladder_detector_area_exited"]
