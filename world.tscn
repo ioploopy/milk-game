@@ -47,3 +47,9 @@ position = Vector2(0, -64)
 
 [node name="Cheese" parent="." instance=ExtResource("6_r1lyj")]
 position = Vector2(168, 40)
+MOVE_DISTANCE = 150
+
+[node name="Cheese2" parent="." instance=ExtResource("6_r1lyj")]
+position = Vector2(560, 40)
+SPEED = 100.0
+MOVE_DISTANCE = 50

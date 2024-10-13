@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://biit261msibkl"]
+[gd_scene load_steps=12 format=3 uid="uid://biit261msibkl"]
 
 [ext_resource type="Script" path="res://cheese.gd" id="1_adej7"]
 [ext_resource type="Texture2D" uid="uid://bnefy8fcsfcb" path="res://stinky_cheese-Sheet.png" id="1_dxufd"]
+[ext_resource type="Texture2D" uid="uid://bpddmragcv6al" path="res://dead_cheese.png" id="2_3pkbl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6lyqc"]
 atlas = ExtResource("1_dxufd")
@@ -27,6 +28,14 @@ region = Rect2(64, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("2_3pkbl")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6lyqc")
 }, {
 "duration": 1.0,
@@ -46,7 +55,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t0eyd"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0u5v"]
+resource_local_to_scene = true
+size = Vector2(11, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6efvs"]
+resource_local_to_scene = true
 size = Vector2(14, 11)
 
 [node name="Cheese" type="CharacterBody2D"]
@@ -56,11 +70,17 @@ script = ExtResource("1_adej7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xihdt")
-animation = &"walk"
-frame_progress = 0.635173
+animation = &"dead"
+frame_progress = 0.9024
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.5)
-shape = SubResource("RectangleShape2D_t0eyd")
+position = Vector2(-0.5, 3.5)
+shape = SubResource("RectangleShape2D_i0u5v")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(0, 2.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6efvs")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

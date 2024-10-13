@@ -5,13 +5,16 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 const ACCELERATION = 800
 const FRICTION = 1000
-const ALIVE = true
+var ALIVE = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var animated_sprite_2d = $AnimatedSprite2D
 var on_ladder: int = 0
 var jumping: bool = false
+var airborn: bool = false
+@onready var landing_timer = $Timer
+
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -25,8 +28,13 @@ func _physics_process(delta):
 
 func apply_gravity(delta):
 		if not is_on_floor() and on_ladder == 0:
+			airborn = true
 			velocity.y += gravity * delta
-			
+		else:
+			if airborn == true:
+				landing_timer.start()
+				airborn = false
+						
 func handle_jump():
 	if is_on_floor() or on_ladder > 0:
 		if Input.is_action_just_pressed("ui_accept"):
@@ -68,6 +76,17 @@ func update_animations(input_axis):
 			animated_sprite_2d.play("jump")
 	else:
 		animated_sprite_2d.play("dead")
+
+func kill_player(unless_jumping=false):
+	var landed = true
+	if unless_jumping:
+		landed = is_on_floor() and landing_timer.is_stopped()
+		if landed:
+			ALIVE = false
+	else:
+		ALIVE = false
+		
+	return {"alive": ALIVE, "jumping": not landed}
 
 
 func _on_ladder_detector_area_entered(area):
