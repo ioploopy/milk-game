@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bipxxx1j7qy7y"]
+
+[ext_resource type="Script" path="res://win_activator.gd" id="1_inbu1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf17b"]
+size = Vector2(44, 20)
+
+[node name="WinActivator" type="Area2D"]
+script = ExtResource("1_inbu1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pf17b")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

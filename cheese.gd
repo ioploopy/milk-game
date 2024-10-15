@@ -49,10 +49,13 @@ func kill_cheese():
 	animated_sprite_2d.play("dead")
 	collision_shape_2d.shape.set_size(Vector2(14,1))
 	collision_shape_area_2d.shape.set_size(Vector2(11,1))
+	#Input.start_joy_vibration(0, 0.5, 0, 0.2)
+
 
 func _on_area_2d_body_entered(body):
 	if body.has_method("kill_player") and ALIVE:
-		var response = (body.kill_player(true))
-		if response.jumping:
+		var response = (body.kill_player(true, "down"))
+		if response.alive:
 			self.kill_cheese()
-		
+		#else:
+			#Input.start_joy_vibration(0, 0.75, 0, 0.25)		

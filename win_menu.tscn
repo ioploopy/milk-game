@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd26tsufb6arl"]
+
+[ext_resource type="Script" path="res://start_menu.gd" id="1_1dwfh"]
+
+[sub_resource type="SystemFont" id="SystemFont_cxk8w"]
+
+[sub_resource type="Theme" id="Theme_37gk6"]
+default_font = SubResource("SystemFont_cxk8w")
+default_font_size = 35
+Label/colors/font_color = Color(0.692553, 0.692115, 0, 1)
+RichTextLabel/colors/default_color = Color(0.976328, 0.974681, 1.54018e-06, 1)
+RichTextLabel/colors/font_outline_color = Color(0.984314, 0.505882, 0, 1)
+RichTextLabel/constants/outline_size = 2
+
+[node name="WinMenu" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dwfh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Again"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/StartGameButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = -0.694
+anchor_right = 0.5
+anchor_bottom = -0.694
+offset_left = -85.0
+offset_top = -31.486
+offset_right = 88.0
+offset_bottom = 17.514
+theme = SubResource("Theme_37gk6")
+text = "You Won!"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit Game"
+
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

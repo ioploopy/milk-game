@@ -80,9 +80,13 @@ collision_mask = 4
 position = Vector2(-0.5, -14.5)
 shape = SubResource("RectangleShape2D_hrdht")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="LandingTimer" type="Timer" parent="."]
 wait_time = 0.1
+one_shot = true
+
+[node name="MenuTimer" type="Timer" parent="."]
 one_shot = true
 
 [connection signal="area_entered" from="LadderDetector" to="." method="_on_ladder_detector_area_entered"]
 [connection signal="area_exited" from="LadderDetector" to="." method="_on_ladder_detector_area_exited"]
+[connection signal="timeout" from="MenuTimer" to="." method="_on_menu_timer_timeout"]

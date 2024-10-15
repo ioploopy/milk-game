@@ -5,6 +5,7 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 const ACCELERATION = 800
 const FRICTION = 1000
+const DEAD_DEPTH = 1000
 var ALIVE = true
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -13,8 +14,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var on_ladder: int = 0
 var jumping: bool = false
 var airborn: bool = false
-@onready var landing_timer = $Timer
-
+@onready var landing_timer = $LandingTimer
+@onready var menu_timer = $MenuTimer
 
 func _physics_process(delta):
 	apply_gravity(delta)
@@ -24,7 +25,9 @@ func _physics_process(delta):
 	handle_acceleration(input_axis, delta)
 	apply_friction(input_axis, delta)
 	update_animations(input_axis)
-	move_and_slide()
+	if ALIVE:
+		move_and_slide()
+	check_depth()
 
 func apply_gravity(delta):
 		if not is_on_floor() and on_ladder == 0:
@@ -77,16 +80,37 @@ func update_animations(input_axis):
 	else:
 		animated_sprite_2d.play("dead")
 
-func kill_player(unless_jumping=false):
+func check_depth():
+	if position.y > DEAD_DEPTH:
+		_kill_player()
+
+
+func _kill_player():
+	ALIVE = false
+	
+	if menu_timer.is_stopped():
+		menu_timer.start()
+	
+
+func kill_player(unless_airborn=false, airborn_safe_direction=""):
 	var landed = true
-	if unless_jumping:
+	if unless_airborn:
 		landed = is_on_floor() and landing_timer.is_stopped()
 		if landed:
-			ALIVE = false
+			self._kill_player()
+		else:
+			match airborn_safe_direction:
+				"up":
+					if velocity.y > 0:
+						self._kill_player()
+				"down":
+					print(velocity.y)
+					if velocity.y < 0:
+						self._kill_player()
 	else:
-		ALIVE = false
+		self._kill_player()
 		
-	return {"alive": ALIVE, "jumping": not landed}
+	return {"alive": ALIVE, "airborn": not landed}
 
 
 func _on_ladder_detector_area_entered(area):
@@ -97,3 +121,5 @@ func _on_ladder_detector_area_exited(area):
 	on_ladder-=1
 	print(on_ladder)
 	
+func _on_menu_timer_timeout():
+	get_tree().change_scene_to_file("res://start_menu.tscn")
