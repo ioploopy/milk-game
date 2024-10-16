@@ -1,0 +1,112 @@
+[gd_scene load_steps=17 format=3 uid="uid://cky0gogu8dgv0"]
+
+[ext_resource type="Texture2D" uid="uid://4xghci3halv4" path="res://fridge_sheet.png" id="1_hxtuw"]
+[ext_resource type="Script" path="res://fridge.gd" id="1_l36xs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnfox"]
+size = Vector2(19, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_harm6"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onsqb"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg4yj"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qyhl"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2yb4"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vefds"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l6q0"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlem6"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uymtf"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(128, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ktqq"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(144, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xk21"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(160, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_63xxc"]
+atlas = ExtResource("1_hxtuw")
+region = Rect2(176, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rgp5r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_harm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onsqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg4yj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qyhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2yb4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vefds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l6q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlem6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uymtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ktqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xk21")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_63xxc")
+}],
+"loop": true,
+"name": &"throw",
+"speed": 10.0
+}]
+
+[node name="Fridge" type="StaticBody2D"]
+script = ExtResource("1_l36xs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2.5, 0)
+shape = SubResource("RectangleShape2D_mnfox")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_rgp5r")
+animation = &"throw"
+frame_progress = 0.312202

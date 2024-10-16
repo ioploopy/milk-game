@@ -14,19 +14,21 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var on_ladder: int = 0
 var jumping: bool = false
 var airborn: bool = false
-@onready var landing_timer = $LandingTimer
 @onready var menu_timer = $MenuTimer
 
 func _physics_process(delta):
 	apply_gravity(delta)
-	handle_jump()
-	handle_ladder(delta)
-	var input_axis = Input.get_axis("ui_left", "ui_right")
+	var input_axis = 0
+	
+	if ALIVE:
+		handle_jump()
+		handle_ladder(delta)
+		input_axis = Input.get_axis("ui_left", "ui_right")
+		
 	handle_acceleration(input_axis, delta)
 	apply_friction(input_axis, delta)
 	update_animations(input_axis)
-	if ALIVE:
-		move_and_slide()
+	move_and_slide()
 	check_depth()
 
 func apply_gravity(delta):
@@ -35,7 +37,6 @@ func apply_gravity(delta):
 			velocity.y += gravity * delta
 		else:
 			if airborn == true:
-				landing_timer.start()
 				airborn = false
 						
 func handle_jump():
@@ -95,7 +96,7 @@ func _kill_player():
 func kill_player(unless_airborn=false, airborn_safe_direction=""):
 	var landed = true
 	if unless_airborn:
-		landed = is_on_floor() and landing_timer.is_stopped()
+		landed = not airborn
 		if landed:
 			self._kill_player()
 		else:
@@ -104,7 +105,6 @@ func kill_player(unless_airborn=false, airborn_safe_direction=""):
 					if velocity.y > 0:
 						self._kill_player()
 				"down":
-					print(velocity.y)
 					if velocity.y < 0:
 						self._kill_player()
 	else:
@@ -115,11 +115,9 @@ func kill_player(unless_airborn=false, airborn_safe_direction=""):
 
 func _on_ladder_detector_area_entered(area):
 	on_ladder+=1
-	print(on_ladder)
 
 func _on_ladder_detector_area_exited(area):
 	on_ladder-=1
-	print(on_ladder)
 	
 func _on_menu_timer_timeout():
 	get_tree().change_scene_to_file("res://start_menu.tscn")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddhelu7ljil54"]
+
+[ext_resource type="Texture2D" uid="uid://b8ha3n3kqgflw" path="res://Milk.png" id="1_lnv30"]
+[ext_resource type="Script" path="res://milk_bottle.gd" id="1_v7b52"]
+
+[node name="MilkBottle" type="RigidBody2D"]
+collision_layer = 8
+gravity_scale = 0.5
+contact_monitor = true
+script = ExtResource("1_v7b52")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lnv30")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-5, 7, -5, -3, -3, -5, -3, -8, 2, -8, 2, -5, 4, -3, 4, 7, 3, 8, -4, 8)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-5, 7, -5, -3, -3, -5, -3, -8, 2, -8, 2, -5, 4, -3, 4, 7, 3, 8, -4, 8)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

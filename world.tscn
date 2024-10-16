@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqi0b8eec6vpy"]
+[gd_scene load_steps=10 format=3 uid="uid://bqi0b8eec6vpy"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_gmpmw"]
 [ext_resource type="PackedScene" uid="uid://bdn7bpve0nelp" path="res://player.tscn" id="2_wstvt"]
@@ -7,12 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://biit261msibkl" path="res://cheese.tscn" id="6_r1lyj"]
 [ext_resource type="PackedScene" uid="uid://bipxxx1j7qy7y" path="res://win_activator.tscn" id="7_1sqjf"]
 [ext_resource type="PackedScene" uid="uid://cyrqrorpc0gq0" path="res://spike.tscn" id="7_gpjbj"]
+[ext_resource type="PackedScene" uid="uid://cky0gogu8dgv0" path="res://fridge.tscn" id="8_6edgs"]
+[ext_resource type="PackedScene" uid="uid://ddhelu7ljil54" path="res://milk_bottle.tscn" id="9_f8rfg"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_gmpmw")
 
 [node name="Player" parent="." instance=ExtResource("2_wstvt")]
-position = Vector2(56, 32)
+position = Vector2(63, 31)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(1, 0)
@@ -30,7 +32,7 @@ layer_0/tile_data = PackedInt32Array(327683, 262145, 0, 327684, 262145, 0, 32768
 [node name="Cheeses" type="CanvasGroup" parent="."]
 
 [node name="Cheese" parent="Cheeses" instance=ExtResource("6_r1lyj")]
-position = Vector2(168, 40)
+position = Vector2(167, 72)
 MOVE_DISTANCE = 150
 
 [node name="Cheese2" parent="Cheeses" instance=ExtResource("6_r1lyj")]
@@ -168,3 +170,9 @@ position = Vector2(656, 32)
 
 [node name="Area2D" parent="." instance=ExtResource("7_1sqjf")]
 position = Vector2(2008, 229)
+
+[node name="Fridge" parent="." instance=ExtResource("8_6edgs")]
+position = Vector2(1589, 132)
+
+[node name="MilkBottle" parent="." instance=ExtResource("9_f8rfg")]
+position = Vector2(1573, 126)
